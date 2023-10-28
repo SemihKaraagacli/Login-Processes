@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import Layout from "../components/layout";
+import Layout from "../components/layout";
 import axios from "axios";
 
 const Index = () => {
@@ -12,17 +12,22 @@ const Index = () => {
   }, []);
 
   return (
-    <div>
-      {Users.map((value, key) => (
-        <div>
-          <tr>
-            <td>{value.username} -|-</td>
-            <td>{value.email} -|-</td>
-            <td>{value.password}</td>
-          </tr>
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <table>
+        <th>USERNAME</th>
+        <th>EMAİL</th>
+        <th>PASSWORD</th>
+        {Users.map((value, key) => (
+          <tbody key={value.id}>
+            <tr className="text-center text-xs truncate">
+              <td>{value.username}</td>
+              <td>{value.email} </td>
+              <td>{value.password}</td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
+    </Layout>
   );
 };
 

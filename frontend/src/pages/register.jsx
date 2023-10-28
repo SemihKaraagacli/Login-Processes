@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const data = { username: "", email: "", password: "" };
+  const [inputUsers, setInputUsers] = useState(data);
+  const handleData = (e) => {
+    setInputUsers({ ...inputUsers, [e.target.name]: e.target.value });
+  };
+  const submitForm = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4000/register", inputUsers)
+      .then((response) => {
+        console.log(response);
+      });
+    navigate(0);
+  };
+
   return (
     <Layout>
-      <form method="post">
+      <form method="post" onSubmit={submitForm}>
         <label className="flex flex-col text-black">
           Username:
           <input
             className="bg-gray-400 rounded-md ps-2"
             type="text"
             name="username"
+            id="username"
+            value={inputUsers.username}
+            onChange={handleData}
           />
         </label>
         <label className="flex flex-col text-black">
@@ -19,6 +40,9 @@ const Register = () => {
             className="bg-gray-400  rounded-md ps-2"
             type="email"
             name="email"
+            id="email"
+            value={inputUsers.email}
+            onChange={handleData}
           />
         </label>
         <label className="flex flex-col text-black">
@@ -27,6 +51,9 @@ const Register = () => {
             className="bg-gray-400  rounded-md ps-2"
             type="password"
             name="password"
+            id="password"
+            value={inputUsers.password}
+            onChange={handleData}
           />
         </label>
         <button
