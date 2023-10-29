@@ -3,6 +3,6 @@ const { loginValidation } = require("../controllers/loginConroller");
 
 const router = express.Router();
 
-router.get("/", loginValidation);
+router.post("/", loginValidation);
 
 module.exports = router;
