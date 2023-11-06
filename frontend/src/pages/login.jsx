@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const cookies = new Cookies();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,9 +17,10 @@ const Login = () => {
       { email, password },
       { withCredentials: true }
     );
-    localStorage.setItem("token", response?.data?.token);
-
-    // console.log(response);
+    console.log(typeof response.data.token);
+    // localStorage.setItem("token", response.data.token);
+    cookies.set("token", response.data.token);
+    navigate("/auth");
   };
   return (
     <Layout>

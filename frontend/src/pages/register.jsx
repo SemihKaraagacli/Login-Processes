@@ -16,8 +16,8 @@ const Register = () => {
       .post("http://localhost:4000/register", inputUsers)
       .then((response) => {
         console.log(response);
+        navigate("/login");
       });
-    navigate(0);
   };
 
   return (

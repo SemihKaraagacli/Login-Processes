@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Auth = () => {
   const [Users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/").then((response) => {
-      setUsers(response.data);
-    });
+    const cookies = new Cookies();
+
+    axios
+      .get("http://localhost:4000/auth", {
+        headers: { Authorization: "" + cookies.get("token") },
+      })
+      .then((response) => {
+        setUsers(response.data);
+      });
   }, []);
 
   return (
