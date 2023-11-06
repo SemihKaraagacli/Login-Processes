@@ -16,7 +16,7 @@ const loginValidation = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
       const token = jwt.sign({ email }, process.env.JWT_KEY, {
-        expiresIn: "10h",
+        expiresIn: "1m",
       });
       const id = user.id;
       res.status(200).json({ token, id });
@@ -25,5 +25,4 @@ const loginValidation = async (req, res) => {
     }
   }
 };
-
 module.exports = { loginValidation };
