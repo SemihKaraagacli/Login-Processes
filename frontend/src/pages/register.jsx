@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,6 +22,14 @@ const Register = () => {
 
   return (
     <Layout>
+      <div className="flex space-x-3 pb-3">
+        <Link className="border rounded-md bg-blue-500 px-2" to={"/"}>
+          Main Page
+        </Link>
+        <Link className="border rounded-md bg-red-500 px-2" to={"/login"}>
+          Login
+        </Link>
+      </div>
       <form method="post" onSubmit={submitForm}>
         <label className="flex flex-col text-black">
           Username:
